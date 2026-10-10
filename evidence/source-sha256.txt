@@ -53,7 +53,7 @@ b7e650f3fce5c53249d1cdc608b54df156a97edd636cf9d23498d0cfe7aec63e  ./licenses/ver
 c50602956c99d3b95b357526cc2b1c1e12ac8d198a660c824c9f03764e86491b  ./requirements-browser.lock
 71081a748b809f774fed4a89c12d6ceaa6b6488814cbc97875c26cfe9f6597b4  ./rust-toolchain.toml
 87b2848b34e37dcdbba4004506b68d82b0235ed7cdb6dcb1bca314b7cc2f0ebb  ./scripts/accessibility-static-tests.mjs
-cb584ec1eda6de9b4613301e93bfb58da4fcd81e9deb1de3fac5e03febc8da66  ./scripts/browser-tests.py
+b39baf1dae327433657e8b3ae15acf01d28b3e936d32e80abc097d72534cef9a  ./scripts/browser-tests.py
 4f74d44e04e0e0be80d0d52005b2a3effe00b7eeaee62d4d3573dc40b2597fc1  ./scripts/build.sh
 50e27aa7c6023d738a01a4c41e2a9f2b3dbacddad3c8417b86af4ee113c302fd  ./scripts/capacity-tests.mjs
 b031b00c2e5fb61923c0ff1fd96919d3b9d7356f6ee879317bbee5da56a0d0f6  ./scripts/collect-licenses.py

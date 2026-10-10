@@ -33,12 +33,24 @@ with sync_playwright() as p:
  landscape=b'\x89PNG\r\n\x1a\n'+chunk(b'IHDR',struct.pack('>IIBBBBB',1920,1080,8,2,0,0,0))+chunk(b'IDAT',zlib.compress((b'\0'+b'\x88\xaa\x88'*1920)*1080))+chunk(b'IEND',b'')
  page.locator('#replace-file').set_input_files({'name':'landscape.png','mimeType':'image/png','buffer':landscape});expect(page.locator('#replace-open')).to_be_enabled();page.locator('#actual-size').check();expect(page.locator('#current-stage img')).to_have_attribute('width','1920');assert page.locator('#current-stage img').evaluate('(img)=>img.getBoundingClientRect().width')==1920;assert page.locator('#current-stage').evaluate('(node)=>node.scrollWidth')>=1920;ok('Non-390px image uses its intrinsic width in CSS-pixel inspection mode')
  page.keyboard.press('Escape');expect(page.locator('#review-dialog')).not_to_be_visible()
- assert page.evaluate('document.activeElement.dataset.slot')=='2';ok('Escape dismisses review and restores keyboard focus')
+ # Dialog visibility changes before its queued close event restores focus.
+ # Wait for the actual accessibility outcome instead of racing that event.
+ expect(page.locator('button[data-slot="2"]')).to_be_focused();ok('Escape dismisses review and restores keyboard focus')
+ for dismissal in ['button','escape','button','escape']:
+  page.locator('button[data-slot="2"]').click();expect(page.locator('#review-dialog')).to_be_visible()
+  if dismissal=='button':page.locator('#review-close').click()
+  else:page.keyboard.press('Escape')
+  expect(page.locator('#review-dialog')).not_to_be_visible();expect(page.locator('button[data-slot="2"]')).to_be_focused()
+ ok('Repeated Close and Escape restore focus after matrix rerenders')
  page.locator('[data-slot="3"]').click();expect(page.locator('#approve')).to_be_disabled();expect(page.locator('#review-reason')).to_contain_text('No capture');page.locator('#review-close').click()
  page.locator('[data-slot="7"]').click();expect(page.locator('#approve')).to_be_disabled();expect(page.locator('#review-status')).to_contain_text('Outdated');page.locator('#review-close').click()
  page.locator('[data-slot="10"]').click();expect(page.locator('#approve')).to_be_disabled();expect(page.locator('#review-status')).to_contain_text('Unverified');page.locator('#review-close').click();ok('Missing, stale and unverified captures block approval')
  page.locator('#search').fill('does not exist');expect(page.locator('#empty')).to_be_visible();page.locator('#clear-filters').click();assert page.locator('.capture-card').count()==12
  page.locator('[data-filter="approved"]').click();assert page.locator('.capture-card').count()==2;page.locator('[data-filter="all"]').click();page.locator('#locale-select').select_option('fr-FR');assert page.locator('.capture-card').count()==3;page.locator('#locale-select').select_option('');ok('Search empty state, reset and combined status/locale filters')
+ page.locator('[data-filter="approved"]').click();page.locator('button[data-slot="0"]').click()
+ page.locator('#review-note').fill('Synthetic focus regression check');page.locator('#reject').click();expect(page.locator('#review-status')).to_have_text('! Changes requested')
+ expect(page.locator('button[data-slot="0"]')).to_have_count(0);page.keyboard.press('Escape');expect(page.locator('#review-dialog')).not_to_be_visible();expect(page.locator('#search')).to_be_focused()
+ page.locator('[data-filter="all"]').click();ok('Removed filtered opener returns focus to the search control')
  with page.expect_download() as download:page.locator('#export-button').click()
  path=ROOT/'evidence/browser-export.json';download.value.save_as(path);data=json.loads(path.read_text());assert data['audit']['complete']==False;assert data['audit']['counts']['expected']==12;assert 'not a digital signature' in data['audit']['caveat'];ok('Portable JSON export preserves incomplete coverage and provenance caveats')
  page.locator('#import-open').click();page.locator('#import-submit').click();expect(page.locator('#import-error')).to_contain_text('Choose a JSON');page.locator('#import-cancel').click();assert page.locator('.capture-card').count()==12;ok('Empty import and cancel preserve the current project')
