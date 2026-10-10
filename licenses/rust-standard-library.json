@@ -1,0 +1,6 @@
+{
+  "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)",
+  "source": "licenses/rust-1.99.0/COPYRIGHT-library.html",
+  "served": "web/RUST-STANDARD-LIBRARY-NOTICES.html",
+  "sha256": "5647be074c8edf7339fd863055923a8fc80bc5610a8d4661ec3b767b9d392c27"
+}

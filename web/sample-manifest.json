@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "project": "Vale",
+  "release": "Autumn release",
+  "build": "vale-0.8.4",
+  "catalog_hash": "4b3f589a8e83b07a478bcdde5418780c33db275bed7ff251dbdaa03797b93aa2",
+  "expected": [
+    {
+      "locale": "en-US",
+      "screen": "Explore",
+      "state": "default",
+      "configuration": "mobile-390",
+      "text_size": "standard",
+      "appearance": "light"
+    },
+    {
+      "locale": "de-DE",
+      "screen": "Explore",
+      "state": "default",
+      "configuration": "mobile-390",
+      "text_size": "standard",
+      "appearance": "light"
+    },
+    {
+      "locale": "fr-FR",
+      "screen": "Explore",
+      "state": "default",
+      "configuration": "mobile-390",
+      "text_size": "standard",
+      "appearance": "light"
+    },
+    {
+      "locale": "ar-SA",
+      "screen": "Explore",
+      "state": "default",
+      "configuration": "mobile-390",
+      "text_size": "standard",
+      "appearance": "light"
+    },
+    {
+      "locale": "en-US",
+      "screen": "Search",
+      "state": "empty",
+      "configuration": "mobile-390",
+      "text_size": "standard",
+      "appearance": "light"
+    },
+    {
+      "locale": "de-DE",
+      "screen": "Search",
+      "state": "empty",
+      "configuration": "mobile-390",
+      "text_size": "standard",
+      "appearance": "light"
+    },
+    {
+      "locale": "fr-FR",
+      "screen": "Search",
+      "state": "empty",
+      "configuration": "mobile-390",
+      "text_size": "standard",
+      "appearance": "light"
+    },
+    {
+      "locale": "ar-SA",
+      "screen": "Search",
+      "state": "empty",
+      "configuration": "mobile-390",
+      "text_size": "standard",
+      "appearance": "light"
+    },
+    {
+      "locale": "en-US",
+      "screen": "Booking",
+      "state": "confirmation",
+      "configuration": "mobile-390",
+      "text_size": "standard",
+      "appearance": "light"
+    },
+    {
+      "locale": "de-DE",
+      "screen": "Booking",
+      "state": "confirmation",
+      "configuration": "mobile-390",
+      "text_size": "standard",
+      "appearance": "light"
+    },
+    {
+      "locale": "fr-FR",
+      "screen": "Booking",
+      "state": "confirmation",
+      "configuration": "mobile-390",
+      "text_size": "standard",
+      "appearance": "light"
+    },
+    {
+      "locale": "ar-SA",
+      "screen": "Booking",
+      "state": "confirmation",
+      "configuration": "mobile-390",
+      "text_size": "standard",
+      "appearance": "light"
+    }
+  ],
+  "captures": [
+    {
+      "slot": {
+        "locale": "en-US",
+        "screen": "Explore",
+        "state": "default",
+        "configuration": "mobile-390",
+        "text_size": "standard",
+        "appearance": "light"
+      },
+      "build": "vale-0.8.4",
+      "catalog_hash": "4b3f589a8e83b07a478bcdde5418780c33db275bed7ff251dbdaa03797b93aa2",
+      "image": "explore-en-US.png",
+      "captured_at": "2026-10-09T10:30:00Z",
+      "sha256": ""
+    },
+    {
+      "slot": {
+        "locale": "de-DE",
+        "screen": "Explore",
+        "state": "default",
+        "configuration": "mobile-390",
+        "text_size": "standard",
+        "appearance": "light"
+      },
+      "build": "vale-0.8.4",
+      "catalog_hash": "4b3f589a8e83b07a478bcdde5418780c33db275bed7ff251dbdaa03797b93aa2",
+      "image": "explore-de-DE.png",
+      "captured_at": "2026-10-09T10:30:00Z",
+      "sha256": ""
+    },
+    {
+      "slot": {
+        "locale": "fr-FR",
+        "screen": "Explore",
+        "state": "default",
+        "configuration": "mobile-390",
+        "text_size": "standard",
+        "appearance": "light"
+      },
+      "build": "vale-0.8.4",
+      "catalog_hash": "4b3f589a8e83b07a478bcdde5418780c33db275bed7ff251dbdaa03797b93aa2",
+      "image": "explore-fr-FR.png",
+      "captured_at": "2026-10-09T10:30:00Z",
+      "sha256": ""
+    },
+    {
+      "slot": {
+        "locale": "en-US",
+        "screen": "Search",
+        "state": "empty",
+        "configuration": "mobile-390",
+        "text_size": "standard",
+        "appearance": "light"
+      },
+      "build": "vale-0.8.4",
+      "catalog_hash": "4b3f589a8e83b07a478bcdde5418780c33db275bed7ff251dbdaa03797b93aa2",
+      "image": "search-en-US.png",
+      "captured_at": "2026-10-09T10:30:00Z",
+      "sha256": ""
+    },
+    {
+      "slot": {
+        "locale": "de-DE",
+        "screen": "Search",
+        "state": "empty",
+        "configuration": "mobile-390",
+        "text_size": "standard",
+        "appearance": "light"
+      },
+      "build": "vale-0.8.4",
+      "catalog_hash": "4b3f589a8e83b07a478bcdde5418780c33db275bed7ff251dbdaa03797b93aa2",
+      "image": "search-de-DE.png",
+      "captured_at": "2026-10-09T10:30:00Z",
+      "sha256": ""
+    },
+    {
+      "slot": {
+        "locale": "ar-SA",
+        "screen": "Search",
+        "state": "empty",
+        "configuration": "mobile-390",
+        "text_size": "standard",
+        "appearance": "light"
+      },
+      "build": "vale-0.8.3",
+      "catalog_hash": "4b3f589a8e83b07a478bcdde5418780c33db275bed7ff251dbdaa03797b93aa2",
+      "image": "search-ar-SA.png",
+      "captured_at": "2026-10-09T10:30:00Z",
+      "sha256": ""
+    },
+    {
+      "slot": {
+        "locale": "en-US",
+        "screen": "Booking",
+        "state": "confirmation",
+        "configuration": "mobile-390",
+        "text_size": "standard",
+        "appearance": "light"
+      },
+      "build": "vale-0.8.4",
+      "catalog_hash": "4b3f589a8e83b07a478bcdde5418780c33db275bed7ff251dbdaa03797b93aa2",
+      "image": "booking-en-US.png",
+      "captured_at": "2026-10-09T10:30:00Z",
+      "sha256": ""
+    },
+    {
+      "slot": {
+        "locale": "de-DE",
+        "screen": "Booking",
+        "state": "confirmation",
+        "configuration": "mobile-390",
+        "text_size": "standard",
+        "appearance": "light"
+      },
+      "build": "vale-0.8.4",
+      "catalog_hash": "4b3f589a8e83b07a478bcdde5418780c33db275bed7ff251dbdaa03797b93aa2",
+      "image": "booking-de-DE.png",
+      "captured_at": "2026-10-09T10:30:00Z",
+      "sha256": ""
+    },
+    {
+      "slot": {
+        "locale": "fr-FR",
+        "screen": "Booking",
+        "state": "confirmation",
+        "configuration": "mobile-390",
+        "text_size": "standard",
+        "appearance": "light"
+      },
+      "build": "vale-0.8.4",
+      "catalog_hash": "",
+      "image": "booking-fr-FR.png",
+      "captured_at": "2026-10-09T10:30:00Z",
+      "sha256": ""
+    }
+  ]
+}

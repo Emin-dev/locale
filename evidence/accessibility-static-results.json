@@ -1,0 +1,62 @@
+{
+  "method": "WCAG relative luminance calculations and source assertions; not browser/computed-style or assistive-technology verification",
+  "palette": "Explicit light UI for both OS light and dark preferences; no implemented dark theme",
+  "contrast": [
+    {
+      "name": "approved",
+      "foreground": "#345d39",
+      "background": "#e9f2e3",
+      "ratio": 6.595
+    },
+    {
+      "name": "pending",
+      "foreground": "#46565e",
+      "background": "#edf0f1",
+      "ratio": 6.66
+    },
+    {
+      "name": "missing",
+      "foreground": "#515b4a",
+      "background": "#f0f1ed",
+      "ratio": 6.285
+    },
+    {
+      "name": "stale / unverified / invalidated",
+      "foreground": "#72521b",
+      "background": "#f8f2e0",
+      "ratio": 6.388
+    },
+    {
+      "name": "rejected",
+      "foreground": "#86462d",
+      "background": "#fcf0e8",
+      "ratio": 6.411
+    },
+    {
+      "name": "hero copy",
+      "foreground": "#59634f",
+      "background": "#f7f8f3",
+      "ratio": 5.922
+    },
+    {
+      "name": "stat copy",
+      "foreground": "#59634f",
+      "background": "#ffffff",
+      "ratio": 6.321
+    },
+    {
+      "name": "filtered / not required",
+      "foreground": "#5b674f",
+      "background": "#fafbf7",
+      "ratio": 5.777
+    }
+  ],
+  "sourceChecks": [
+    "Intrinsic-dimension CSS mode",
+    "CSS pixel meaning disclosed",
+    "Distinct device/text-size/appearance capture names",
+    "Visible appearance in matrix",
+    "In-dialog polite live status",
+    "Focusable image scroll regions"
+  ]
+}

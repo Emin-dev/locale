@@ -1,0 +1,7 @@
+# Exact installed QA dependency set. Python 3.12 is the tested interpreter.
+# Install in an isolated environment: python -m pip install -r requirements-browser.lock
+# Runtime/deployment has no Python dependency and performs no pip install.
+playwright==1.62.0
+pyee==13.0.1
+greenlet==3.5.5
+typing_extensions==4.16.0

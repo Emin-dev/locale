@@ -1,0 +1,51 @@
+{
+  "manifest": {
+    "schema_version": 1,
+    "project": "Fixture",
+    "release": "1.0",
+    "build": "b1",
+    "catalog_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "expected": [
+      {
+        "locale": "en-US",
+        "screen": "Home",
+        "state": "default",
+        "configuration": "mobile-390",
+        "text_size": "standard",
+        "appearance": "light"
+      },
+      {
+        "locale": "de-DE",
+        "screen": "Home",
+        "state": "default",
+        "configuration": "mobile-390",
+        "text_size": "standard",
+        "appearance": "light"
+      }
+    ],
+    "captures": [
+      {
+        "slot": {
+          "locale": "en-US",
+          "screen": "Home",
+          "state": "default",
+          "configuration": "mobile-390",
+          "text_size": "standard",
+          "appearance": "light"
+        },
+        "build": "b1",
+        "catalog_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "image": "home.png",
+        "captured_at": "2026-10-09T12:00:00Z",
+        "sha256": ""
+      }
+    ]
+  },
+  "attachments": [
+    {
+      "name": "home.png",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "reviews": []
+}

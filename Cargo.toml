@@ -1,0 +1,18 @@
+[package]
+name = "locale-review"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "Bounded multilingual release coverage and evidence-bound human review"
+[lib]
+crate-type = ["cdylib", "rlib"]
+[dependencies]
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+sha2 = "0.10.9"
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

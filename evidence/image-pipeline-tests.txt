@@ -1,0 +1,8 @@
+PASS At most one active worker
+PASS At most one queued image
+PASS Queued cancellation starts no decoder
+PASS Active cancellation terminates worker
+PASS Cancelled worker cannot complete into next session
+PASS Failed decode terminates worker
+PASS Cancelled read never starts a worker
+PASS All worker instances terminated
