@@ -26,6 +26,7 @@ function toast(text){if($('review-dialog').open)$('review-feedback').textContent
 function showError(id,error){$(id).textContent=error.message||String(error);$(id).hidden=false;}
 function revoke(map){for(const v of map.values())URL.revokeObjectURL(v.url);}
 function statusChip(status){return el('span',`status-chip ${status}`,`${symbol[status]} ${label[status]}`);}
+function captureArrow(){const span=el('span','card-arrow'),svg=document.createElementNS('http://www.w3.org/2000/svg','svg'),path=document.createElementNS('http://www.w3.org/2000/svg','path');span.setAttribute('aria-hidden','true');svg.setAttribute('class','ui-icon');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('width','12');svg.setAttribute('height','12');svg.setAttribute('focusable','false');path.setAttribute('d','M6 18 18 6M6 6h12v12');svg.append(path);span.append(svg);return span;}
 function matches(row){const term=$('search').value.trim().toLowerCase();return(!term||`${row.slot.screen} ${row.slot.state}`.toLowerCase().includes(term)) &&(filter==='all'||filter==='approved'&&row.status==='approved'||filter==='attention'&&['missing','stale','unverified','rejected','invalidated'].includes(row.status));}
 function render(){
  if(!project||!audit)return;
@@ -51,7 +52,7 @@ function render(){
    const mob=el('div','mobile-locale');mob.append(document.createTextNode(l),el('small','',localeNames[l]||''));button.append(mob);
    const area=el('div','thumb-area');const preview=r.capture&&previews.get(r.capture.image);
    if(preview){const img=el('img');img.src=preview.url;img.alt='';img.loading='lazy';img.width=390;img.height=740;area.append(img);}else{area.append(el('span','missing-symbol',r.status==='missing'?'+':'▧'),el('span','missing-caption',r.status==='missing'?'Awaiting capture':'Image not attached'));}
-   const foot=el('div','card-foot');foot.append(statusChip(r.status),el('span','card-arrow','↗'));button.append(area,foot);button.addEventListener('click',()=>openReview(i));cell.append(button);row.append(cell);
+   const foot=el('div','card-foot');foot.append(statusChip(r.status),captureArrow());button.append(area,foot);button.addEventListener('click',()=>openReview(i));cell.append(button);row.append(cell);
   }matrix.append(row);
  }
  $('empty').hidden=shown>0;matrix.hidden=!shown;

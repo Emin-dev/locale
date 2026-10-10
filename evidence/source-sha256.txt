@@ -53,7 +53,7 @@ b7e650f3fce5c53249d1cdc608b54df156a97edd636cf9d23498d0cfe7aec63e  ./licenses/ver
 c50602956c99d3b95b357526cc2b1c1e12ac8d198a660c824c9f03764e86491b  ./requirements-browser.lock
 71081a748b809f774fed4a89c12d6ceaa6b6488814cbc97875c26cfe9f6597b4  ./rust-toolchain.toml
 87b2848b34e37dcdbba4004506b68d82b0235ed7cdb6dcb1bca314b7cc2f0ebb  ./scripts/accessibility-static-tests.mjs
-b39baf1dae327433657e8b3ae15acf01d28b3e936d32e80abc097d72534cef9a  ./scripts/browser-tests.py
+58a82a2120153696d47a60f0abc4eca2f24201f40cef40288f038e50341e36af  ./scripts/browser-tests.py
 4f74d44e04e0e0be80d0d52005b2a3effe00b7eeaee62d4d3573dc40b2597fc1  ./scripts/build.sh
 50e27aa7c6023d738a01a4c41e2a9f2b3dbacddad3c8417b86af4ee113c302fd  ./scripts/capacity-tests.mjs
 b031b00c2e5fb61923c0ff1fd96919d3b9d7356f6ee879317bbee5da56a0d0f6  ./scripts/collect-licenses.py
@@ -66,7 +66,7 @@ e1bd903216a1626fc72a38bd946f0ea52c7ec0c6416a8fa078f2aef2e5704124  ./scripts/imag
 444de6b08043eaebc3416430577a671f46fed5665f58562feab3f929209fadd9  ./tests/fixture.json
 a85a99fc87b556a53d796ff0bdaa6f826bbe11626a510c57304332ad2486dc02  ./vercel.json
 5647be074c8edf7339fd863055923a8fc80bc5610a8d4661ec3b767b9d392c27  ./web/RUST-STANDARD-LIBRARY-NOTICES.html
-fac297f894179143b6420dc634b1f2caf66f44e8af327902af57d93356da8372  ./web/app.js
+41432f862278fa870bae7ffc47b8514bb1e3dec2c8fa6c15c43d42298ceeaf78  ./web/app.js
 ebd28655dc344b622ad88891e9a6cfed0f45e989eca78266f58e77207bf0d3da  ./web/files.js
 64788935b8c2ded05e1ca76cec9000be0cd76b3853e42491c0662c9ce7bc3833  ./web/fixtures/booking-de-DE.png
 96737e7fd0a8fce15a86eaaaf45e5f7ddc072d80654f2b38a95b9024a32ab5c6  ./web/fixtures/booking-en-US.png
@@ -80,8 +80,8 @@ c97c1429534ea404253ed4f628114b8ed7422268a6f35ff5ea75a99d97835394  ./web/fixtures
 0a0fb31b5fa23afc23df0295075d85275ceedc3ceb5ebc99aa6e70afb31ad812  ./web/icon.svg
 de8b4242d75b72c4bb8029786c1bef52db59f2156f5cf24b0562ec2519fa75c1  ./web/image-pipeline.js
 3fbbba1e80978b677eccc446d65ecf60b3045c6794ff84961c83de1b300ad82e  ./web/image-worker.js
-cb0dd537953b72ba3c1a8cf2bcfcd47303e723bed5fe7ce31c572ec49ddf5df6  ./web/index.html
+c43ddd553afbe88c2e88abf1abb18b805e2d44d6655371a2a2cc0872a8e161d2  ./web/index.html
 bce0a534f399a2f123398fa851e3b3beb2bf6a6fcf68b22924ca863cd07f03bf  ./web/locale_review.wasm
 9043b8670cd741df815fd3c1904454956502492701188b379d1168231a0b8ae8  ./web/sample-manifest.json
-77ae65cbb1420f8249c716454fcad882c123337947e6f223cd26bd516c1dc170  ./web/style.css
+a1588be8fe8cb949d30faf6ba36ab8d6f011bae9d13ab8b50ee8a4d2ca42dfb5  ./web/style.css
 f7c1230871e533884c1a46fc3bc46e3fb2b43c283d03e19dc32ad1d5ff48df54  ./web/third-party-licenses.txt

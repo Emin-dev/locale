@@ -18,6 +18,24 @@ with sync_playwright() as p:
  page.goto(URL);expect(page.locator('#stat-expected')).to_have_text('12');expect(page.locator('#stat-approved')).to_have_text('2')
  expect(page.locator('#stat-attention')).to_have_text('6');assert page.locator('.capture-card').count()==12
  ok('Rust/WASM sample boots with 12 declared slots, 9 captures, 2 approvals and 6 blockers')
+ # The decorative hero used to escape its narrow desktop coordinate box.
+ # Verify the document itself fits; intentional matrix scrolling stays local.
+ layout=[]
+ for width in [780,979,980,981,1100,1179,1180,1181,1199,1200,1201,1440]:
+  page.set_viewport_size({'width':width,'height':1050})
+  dimensions=page.evaluate('''() => ({width:innerWidth,client:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth,body:document.body.scrollWidth,art:[...document.querySelectorAll('.hero-art > *')].filter(el=>el.getBoundingClientRect().width).map(el=>({class:el.className,right:el.getBoundingClientRect().right})),matrix:{client:document.querySelector('#matrix').clientWidth,scroll:document.querySelector('#matrix').scrollWidth,overflow:getComputedStyle(document.querySelector('#matrix')).overflowX}})''')
+  assert dimensions['scroll']<=dimensions['client'] and dimensions['body']<=dimensions['client'],dimensions
+  assert all(item['right']<=dimensions['client'] for item in dimensions['art']),dimensions
+  assert dimensions['matrix']['overflow']=='auto',dimensions
+  if width==780:assert dimensions['matrix']['scroll']>dimensions['matrix']['client'],dimensions
+  layout.append(dimensions)
+ (ROOT/'evidence/browser-layout-results.json').write_text(json.dumps(layout,indent=2))
+ ok('No page overflow at 1180px or neighboring desktop breakpoints; matrix overflow remains local')
+ for selector in ['.release-icon','#import-open','#export-button','.search','.matrix-footer','.import-step a']:
+  expect(page.locator(selector+' svg.ui-icon')).to_have_count(1)
+  expect(page.locator(selector+' svg.ui-icon')).to_have_attribute('aria-hidden','true')
+ expect(page.locator('.card-arrow svg.ui-icon')).to_have_count(12)
+ ok('Release, import, export, search and capture decorations use local SVG icons')
  page.screenshot(path=str(ROOT/'evidence/desktop.png'),full_page=True)
  page.locator('[data-slot="2"]').click();expect(page.locator('#review-title')).to_have_text('Explore · fr-FR')
  page.locator('#approve').click();expect(page.locator('#review-status')).to_have_text('✓ Approved');expect(page.locator('#stat-approved')).to_have_text('3');expect(page.locator('#review-feedback')).to_contain_text('Capture approved')
@@ -66,4 +84,4 @@ with sync_playwright() as p:
  assert not errors,errors;ok('No uncaught browser errors across exercised workflows')
  browser.close()
 server.shutdown()
-(ROOT/'evidence/browser-results.json').write_text(json.dumps({'browser':os.environ.get('CHROMIUM_EXECUTABLE','Playwright 1.62.0 bundled Chromium'),'emulation':'1440x1050 desktop; 390x844 mobile, not physical-device testing','passed':results,'errors':errors},indent=2))
+(ROOT/'evidence/browser-results.json').write_text(json.dumps({'browser':os.environ.get('CHROMIUM_EXECUTABLE','Playwright 1.62.0 bundled Chromium'),'emulation':'780–1440px desktop breakpoint checks including 1180px; 390x844 mobile, not physical-device testing','passed':results,'errors':errors},indent=2))
