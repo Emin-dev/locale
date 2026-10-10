@@ -4,6 +4,22 @@ Review multilingual releases without losing track of missing or outdated screens
 
 **Bounded, local-only demonstration.** Rust owns validation, coverage, evidence fingerprints, review decisions and JSON reporting. Capacity checks refuse a decision atomically if its candidate snapshot could no longer be exported. A small framework-free browser UI loads Rust as WebAssembly. The supplied **Vale / Autumn release** project, UI captures, reviewers and review notes are entirely synthetic.
 
+## Try the demo
+
+[Open the Locale demo](https://project-refiy.vercel.app/) with the bundled synthetic **Vale / Autumn release**. No account or setup is needed.
+
+1. Explore **All views** and **Needs attention** to see missing, outdated and unverified captures.
+2. Open an available capture to inspect its image and declared metadata, then choose **Close review**.
+3. Choose **Export report** and inspect the JSON locally. Incomplete coverage remains visible; this is not translation, visual-quality or accessibility certification.
+
+Work stays in this tab and clears on reload. Export before leaving. To use your own synthetic inputs or change the code, see [Run / build](#run--build) and [Manifest and import workflow](#manifest-and-import-workflow).
+
+## Feedback and small fixes
+
+[Search or open an issue](https://github.com/Emin-dev/locale/issues) with your browser/version, exact steps, expected result and actual result. Use synthetic examples only; do not post private screenshots, full real-world exports, secrets or security exploit details in public issues.
+
+For a small code or documentation fix, explain the change and include the relevant [verification](#verification) results, including anything you could not run. Rebuild generated WASM with the documented script when changing the Rust engine, and preserve fixture provenance and license notices.
+
 ## Implemented
 
 - An explicit expected locale × screen × state × configuration × text-size × appearance matrix. Coverage is never inferred from the captures that happened to arrive.
