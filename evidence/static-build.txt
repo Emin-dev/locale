@@ -1,0 +1,1 @@
+Static build verified: WASM smoke, 9 sample captures, 21 pinned dependencies, 43 Cargo license texts, pinned Rust standard-library notices. No Rust build or dependency install performed.

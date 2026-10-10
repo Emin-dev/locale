@@ -1,0 +1,8 @@
+{
+  "inputDecisionBytes": 1048576,
+  "accepted": false,
+  "error": "Project capacity reached. This change was not saved; export the current session before starting a smaller project.",
+  "originalProjectUnchanged": true,
+  "originalExportStillWorks": true,
+  "retainedReviewCount": 499
+}

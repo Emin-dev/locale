@@ -1,0 +1,10 @@
+PASS WASM ABI sample coverage oracle
+PASS WASM decision and rejection sequence
+PASS Changed bytes invalidate current decisions
+PASS Stale project revision blocks outdated decision
+PASS Portable export preserves incomplete state
+PASS 250 repeated ABI calls stable
+PASS Allocation limit enforced
+PASS PNG header dimensions correct
+PASS Empty/truncated/SVG-disguised input rejected
+PASS Oversized dimensions/pixels and zero dimensions rejected

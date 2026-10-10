@@ -1,0 +1,25 @@
+{
+  "test_kind": "Unit tests with injected fake workers/readers. No actual browser decoder was executed.",
+  "checks": [
+    "At most one active worker",
+    "At most one queued image",
+    "Queued cancellation starts no decoder",
+    "Active cancellation terminates worker",
+    "Cancelled worker cannot complete into next session",
+    "Failed decode terminates worker",
+    "Cancelled read never starts a worker",
+    "All worker instances terminated"
+  ],
+  "maxActiveWorkers": 1,
+  "liveWorkersAtEnd": 0,
+  "events": [
+    "start",
+    "terminate",
+    "start",
+    "terminate",
+    "start",
+    "terminate",
+    "start",
+    "terminate"
+  ]
+}

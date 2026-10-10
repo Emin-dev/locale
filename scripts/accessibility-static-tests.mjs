@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=f=>fs.readFileSync(new URL('../web/'+f,import.meta.url),'utf8');
+const css=read('style.css'),html=read('index.html'),js=read('app.js');
+const luminance=hex=>{const c=hex.match(/[0-9a-f]{2}/gi).map(v=>parseInt(v,16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return c[0]*.2126+c[1]*.7152+c[2]*.0722;};
+const cases=[['approved','#345d39','#e9f2e3'],['pending','#46565e','#edf0f1'],['missing','#515b4a','#f0f1ed'],['stale / unverified / invalidated','#72521b','#f8f2e0'],['rejected','#86462d','#fcf0e8'],['hero copy','#59634f','#f7f8f3'],['stat copy','#59634f','#ffffff'],['filtered / not required','#5b674f','#fafbf7']];
+const results=cases.map(([name,foreground,background])=>{const a=luminance(foreground),b=luminance(background),ratio=(Math.max(a,b)+.05)/(Math.min(a,b)+.05);assert(ratio>=4.5);assert(css.includes(foreground));return{name,foreground,background,ratio:Number(ratio.toFixed(3))};});
+assert(css.includes('color-scheme:light'));assert(!css.includes('width:390px'));assert(css.includes('.image-stage.actual img{width:auto;max-width:none}'));assert(js.includes('img.width=preview.width;img.height=preview.height'));assert(html.includes('100% (CSS pixels)'));assert(html.includes('one decoded image pixel uses one CSS pixel'));
+assert(js.includes('${s.configuration}, ${s.text_size} text, ${s.appearance} appearance'));assert(js.includes("s.configuration+' · '+s.text_size+' · '+s.appearance"));
+const feedback=html.indexOf('id="review-feedback"');assert(feedback>html.indexOf('id="review-dialog"')&&feedback<html.indexOf('id="import-dialog"'));assert(html.slice(feedback,feedback+140).includes('aria-live="polite"'));assert(js.includes("$('review-feedback').textContent=text"));
+assert(html.includes('aria-label="Scrollable reference image"'));assert(html.includes('aria-label="Scrollable review image"'));
+fs.writeFileSync(new URL('../evidence/accessibility-static-results.json',import.meta.url),JSON.stringify({method:'WCAG relative luminance calculations and source assertions; not browser/computed-style or assistive-technology verification',palette:'Explicit light UI for both OS light and dark preferences; no implemented dark theme',contrast:results,sourceChecks:['Intrinsic-dimension CSS mode','CSS pixel meaning disclosed','Distinct device/text-size/appearance capture names','Visible appearance in matrix','In-dialog polite live status','Focusable image scroll regions']},null,2)+'\n');console.log('PASS contrast and accessibility source regressions');
