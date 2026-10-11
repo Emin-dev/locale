@@ -14,6 +14,8 @@ Review multilingual releases without losing track of missing or outdated screens
 
 Work stays in this tab and clears on reload. Export before leaving. To use your own synthetic inputs or change the code, see [Run / build](#run--build) and [Manifest and import workflow](#manifest-and-import-workflow).
 
+Export preserves a review record for reference, without image bytes. Exported reports cannot be imported to resume a session. Keep your original manifest and image files if you want to review them again; importing them starts a new session with no previous decisions.
+
 ## Feedback and small fixes
 
 [Search or open an issue](https://github.com/Emin-dev/locale/issues) with your browser/version, exact steps, expected result and actual result. Use synthetic examples only; do not post private screenshots, full real-world exports, secrets or security exploit details in public issues.
