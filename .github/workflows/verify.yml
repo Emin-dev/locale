@@ -96,6 +96,7 @@ jobs:
           node scripts/wasm-tests.mjs
           node scripts/capacity-tests.mjs
           node scripts/image-pipeline-tests.mjs
+          node scripts/image-format-tests.mjs
           node scripts/accessibility-static-tests.mjs
       - name: Install the locked Python browser tools and their Chromium
         timeout-minutes: 6

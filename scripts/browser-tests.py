@@ -50,6 +50,29 @@ with sync_playwright() as p:
  def chunk(kind,data):return struct.pack('>I',len(data))+kind+data+struct.pack('>I',zlib.crc32(kind+data)&0xffffffff)
  landscape=b'\x89PNG\r\n\x1a\n'+chunk(b'IHDR',struct.pack('>IIBBBBB',1920,1080,8,2,0,0,0))+chunk(b'IDAT',zlib.compress((b'\0'+b'\x88\xaa\x88'*1920)*1080))+chunk(b'IEND',b'')
  page.locator('#replace-file').set_input_files({'name':'landscape.png','mimeType':'image/png','buffer':landscape});expect(page.locator('#replace-open')).to_be_enabled();page.locator('#actual-size').check();expect(page.locator('#current-stage img')).to_have_attribute('width','1920');assert page.locator('#current-stage img').evaluate('(img)=>img.getBoundingClientRect().width')==1920;assert page.locator('#current-stage').evaluate('(node)=>node.scrollWidth')>=1920;ok('Non-390px image uses its intrinsic width in CSS-pixel inspection mode')
+ # Real decodable 1x1 static/APNG inputs. APNG is rejected by bytes, regardless
+ # of extension/MIME; failed replacement must leave the current review intact.
+ def frame(sequence):return chunk(b'fcTL',struct.pack('>IIIIIHHBB',sequence,1,1,0,0,1,10,0,0))
+ tiny_header=chunk(b'IHDR',struct.pack('>IIBBBBB',1,1,8,6,0,0,0))
+ tiny_data=chunk(b'IDAT',zlib.compress(b'\0\xff\0\0\xff'))
+ static_png=b'\x89PNG\r\n\x1a\n'+tiny_header+tiny_data+chunk(b'IEND',b'')
+ animated_png=b'\x89PNG\r\n\x1a\n'+tiny_header+chunk(b'acTL',struct.pack('>II',2,0))+frame(0)+tiny_data+frame(1)+chunk(b'fdAT',struct.pack('>I',2)+zlib.compress(b'\0\0\0\xff\xff'))+chunk(b'IEND',b'')
+ import base64
+ animated_webp=base64.b64decode('UklGRoQAAABXRUJQVlA4WAoAAAACAAAAAAAAAAAAQU5JTQYAAAAAAAAAAABBTk1GKAAAAAAAAAAAAAAAAAAAAGQAAAJWUDhMDwAAAC8AAAAABxD9j/4HIqL/AQBBTk1GKAAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDwAAAC8AAAAABxDR//4HIqL/AQA=')
+ for data,mime in [(static_png,'image/png'),(animated_png,'image/png'),(animated_webp,'image/webp')]:
+  assert page.evaluate('''async ({bytes,mime})=>{const bitmap=await createImageBitmap(new Blob([new Uint8Array(bytes)],{type:mime}));const size=[bitmap.width,bitmap.height];bitmap.close();return size;}''',{'bytes':list(data),'mime':mime})==[1,1]
+ original_src=page.locator('#current-stage img').get_attribute('src')
+ original_status=page.locator('#review-status').inner_text()
+ original_history=page.locator('#review-history').inner_text()
+ for data,mime,message in [(animated_png,'image/png','Animated PNG screenshots are not supported'),(animated_png,'application/octet-stream','Animated PNG screenshots are not supported'),(animated_webp,'image/png','Only valid PNG and JPEG')]:
+  # Require a fresh error from this attempt, not the previous APNG rejection.
+  page.locator('#review-error').evaluate('(node)=>{node.textContent="";node.hidden=true;}')
+  page.locator('#replace-file').set_input_files({'name':'renamed.png','mimeType':mime,'buffer':data})
+  expect(page.locator('#review-error')).to_contain_text(message);expect(page.locator('#replace-open')).to_be_enabled()
+  assert page.locator('#current-stage img').get_attribute('src')==original_src
+  assert page.locator('#review-status').inner_text()==original_status
+  assert page.locator('#review-history').inner_text()==original_history
+ ok('Decodable APNG and renamed animated WebP cannot replace or alter an existing review')
  page.keyboard.press('Escape');expect(page.locator('#review-dialog')).not_to_be_visible()
  # Dialog visibility changes before its queued close event restores focus.
  # Wait for the actual accessibility outcome instead of racing that event.
@@ -76,6 +99,10 @@ with sync_playwright() as p:
  manifest=json.loads((ROOT/'web/sample-manifest.json').read_text());manifest['captures'][0]['image']='https://evil.example/x.png'
  page.locator('#import-open').click();page.locator('#manifest-file').set_input_files({'name':'badpath.json','mimeType':'application/json','buffer':json.dumps(manifest).encode()});page.locator('#import-submit').click();expect(page.locator('#import-error')).to_contain_text('unsafe image name');page.locator('#import-cancel').click();ok('Remote image references are rejected by the Rust validator')
  page.locator('#import-open').click();page.locator('#manifest-file').set_input_files(str(ROOT/'web/sample-manifest.json'));page.locator('#image-files').set_input_files({'name':'explore-en-US.png','mimeType':'image/png','buffer':b'<svg onload="alert(1)"></svg>'});page.locator('#import-submit').click();expect(page.locator('#import-error')).to_contain_text('valid PNG');page.locator('#import-cancel').click();ok('SVG content masquerading as PNG is rejected before decode')
+ page.locator('#import-open').click();page.locator('#manifest-file').set_input_files(str(ROOT/'web/sample-manifest.json'));page.locator('#image-files').set_input_files({'name':'explore-en-US.png','mimeType':'image/png','buffer':animated_png});page.locator('#import-submit').click();expect(page.locator('#import-error')).to_contain_text('Animated PNG screenshots are not supported');page.locator('#import-cancel').click()
+ assert page.locator('.capture-card').count()==12
+ page.locator('[data-slot="2"]').click();assert page.locator('#current-stage img').get_attribute('src')==original_src;assert page.locator('#review-history').inner_text()==original_history;page.locator('#review-close').click()
+ ok('APNG bundle import fails atomically and preserves the current session')
  page.locator('#import-open').click();page.locator('#manifest-file').set_input_files(str(ROOT/'web/sample-manifest.json'));page.locator('#import-submit').click();expect(page.locator('#import-dialog')).not_to_be_visible();expect(page.locator('#stat-approved')).to_have_text('0');page.locator('[data-slot="0"]').click();expect(page.locator('#approve')).to_be_disabled();page.locator('#replace-file').set_input_files(str(ROOT/'web/fixtures/explore-en-US.png'));expect(page.locator('#approve')).to_be_enabled();page.locator('#approve').click();expect(page.locator('#review-error')).to_contain_text('Invalid review event');page.locator('#reviewer-name').fill('Local reviewer');page.locator('#approve').click();expect(page.locator('#review-status')).to_have_text('✓ Approved');ok('Manifest-only import is unverified until local image and reviewer are supplied')
  page.screenshot(path=str(ROOT/'evidence/desktop-review.png'),full_page=True);page.locator('#review-close').click()
  page.set_viewport_size({'width':390,'height':844});page.goto(URL);expect(page.locator('#stat-expected')).to_have_text('12');assert page.evaluate('document.documentElement.scrollWidth <= innerWidth');page.screenshot(path=str(ROOT/'evidence/mobile.png'),full_page=True)
