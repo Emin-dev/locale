@@ -86,7 +86,7 @@ No imported review history is trusted or loaded by the UI. A new manifest import
 - Image: 5 MiB, maximum side 8,000 pixels, maximum 12 megapixels.
 - Session image bytes: 30 MiB; session image dimensions: 60 megapixels total.
 - Project/build/release strings: 100 characters; slot identity parts and reviewer: 80; filenames: 128; comment: 1,500.
-- Filenames are basenames only. PNG and JPEG bytes are inspected before bounded browser decode. SVG is not accepted. Image decoding uses the browser’s own decoder; the application does not claim to sanitize unsafe image codecs.
+- Filenames are basenames only. Static PNG and JPEG bytes are inspected before bounded browser decode. Animated PNG (APNG) is rejected with an explicit error before decoding because a single-frame pixel budget does not bound playback. PNG chunk framing, checksums and required structure are checked; malformed/truncated containers are rejected. WebP (static or animated), GIF and SVG remain unsupported. Image decoding uses the browser’s own decoder; the application does not claim to sanitize unsafe image codecs. Original accepted bytes and their hashes are preserved locally; animated images are not silently flattened.
 - Image processing uses a shared queue with at most one active dedicated worker and one pending job. Cancellation aborts local FileReader work and terminates the active image worker, rejects queued work and ignores late results. Replacements also check the original modal session and project revision. Unit tests exercise queue lifetime with injected workers; actual browser-decoder cleanup/performance is not claimed before browser QA.
 
 ## Verification
@@ -98,6 +98,7 @@ node --check web/app.js
 node scripts/wasm-tests.mjs
 node scripts/capacity-tests.mjs
 node scripts/image-pipeline-tests.mjs
+node scripts/image-format-tests.mjs
 node scripts/accessibility-static-tests.mjs
 node scripts/verify-build.mjs
 python scripts/browser-tests.py
