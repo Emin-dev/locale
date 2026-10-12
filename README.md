@@ -8,6 +8,8 @@ Review multilingual releases without losing track of missing or outdated screens
 
 [Open the Locale demo](https://project-refiy.vercel.app/) with the bundled synthetic **Vale / Autumn release**. No account or setup is needed.
 
+For a step-by-step exercise with expected report fields and limitations, see the [first-use guide](docs/FIRST-USE.md).
+
 1. Explore **All views** and **Needs attention** to see missing, outdated and unverified captures.
 2. Open an available capture to inspect its image and declared metadata, then choose **Close review**.
 3. Choose **Export report** and inspect the JSON locally. Incomplete coverage remains visible; this is not translation, visual-quality or accessibility certification.
