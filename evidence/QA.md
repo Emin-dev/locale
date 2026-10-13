@@ -1,5 +1,7 @@
 # Locale verification record
 
+The sections below preserve earlier local build-environment results, including their browser-launch failures and unexecuted checks. The exact-revision CI addendum at the end records later evidence separately; it does not turn any unexecuted local check into a pass.
+
 ## Executed and passed
 
 - Rust 1.99.0 native tests: **21/21** (`cargo test --locked`). Covers declared coverage; approval/rejection/comment sequences; changed bytes, metadata and target invalidation; hash mismatch; absent bytes/identity; duplicate slots/images; unsafe paths; input/count limits; stale project revision; idempotent repeated decisions; unknown fields; required change-request notes; invalid calendar dates; complete/partial export.
@@ -61,3 +63,11 @@ Public command logs normalize machine-specific checkout paths to `<project>`; th
 ## Standard-library distribution notices
 
 The exact Rust 1.99.0 `COPYRIGHT-library.html` is retained in source and served unchanged, SHA-256 `5647be074c8edf7339fd863055923a8fc80bc5610a8d4661ec3b767b9d392c27`. The static packaging assertion checks source and served copies against that pinned hash. This addition does not change the compiled WASM or domain code.
+
+## Exact-revision CI addendum (2026-10-12)
+
+Revision `b76896157168ca811709b66aaff9be09137f3843` subsequently passed [GitHub Actions run 38241741590](https://github.com/Emin-dev/locale/actions/runs/38241741590) on October 12, 2026. The [job record](https://github.com/Emin-dev/locale/actions/runs/38241741590/job/114785769928) records successful **Verify checkout identity** and **Run the real Chromium browser suite** steps. These existing records were checked on October 13, 2026; no new browser run was performed for this addendum.
+
+The [workflow at that exact revision](https://github.com/Emin-dev/locale/blob/b76896157168ca811709b66aaff9be09137f3843/.github/workflows/verify.yml) runs the browser suite against a temporary loopback server on its disposable runner. This establishes automated Chromium execution for that source revision, separately from the earlier local environment failures preserved above. Screenshots and reports were not uploaded by this workflow, so this addendum does not claim an independent review of their pixels.
+
+This CI evidence does not establish the source currently served by a public deployment, hosted visual acceptance, screen-reader or other assistive-technology coverage, or real Safari/iOS/Android device behavior. Those remain separate verification gates. A later source or documentation revision needs its own applicable checks; the linked result is bound to the SHA stated here.
